@@ -114,10 +114,9 @@ export default function createlistener(props) {
 			}
 		},
 	  	onChatroomChange: (event) => {
-			const {type,from,gid,chatroom } = event;
+			const { type } = event;
 		  	if (type === "memberJoinChatRoomSuccess") {
-				// store.dispatch(MessageActions.addRoomNotify(from, gid, chatroom));
-				store.dispatch(MessageActions.addRoomNotify(event));
+				store.dispatch(MessageActions.addNotify(event,"chatRoom"));
 			}
 		},
 		onContactDeleted: (msg) => {

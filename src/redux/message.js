@@ -58,7 +58,7 @@ const { Types, Creators } = createActions({
     updateThreadMessage: ['to','messageList','isScroll'],
     setThreadHistoryStart:['start'],
     setThreadHasHistory: ['status'],
-	updateChatroomDetails: ["formatMsg"],
+	updateNotifyDetails: ["formatMsg"],
 
 	// -async-
 	sendTxtMessage: (to, chatType, message = {}, isChatThread=false) => {
@@ -462,14 +462,13 @@ const { Types, Creators } = createActions({
 			}
 		}
 	},
-	addRoomNotify: (message) => {
-		const { from, gid, chatroom } = message
+	addNotify: (message,notifyType) => {
+		const { from, gid } = message
 		return (dispatch, getState) => {
-			const formatMsg = formatLocalMessage(gid, chatroom, message, 'roomNotify')
+			const formatMsg = formatLocalMessage(gid, notifyType, message, 'notify')
 			formatMsg.from = from;
-			formatMsg.type = 'txt',
-			console.log('formatMsg>>>', formatMsg);
-			dispatch(Creators.updateChatroomDetails(formatMsg))
+			formatMsg.type = 'notify',
+			dispatch(Creators.updateNotifyDetails(formatMsg))
 		}
 	}
 });
@@ -881,25 +880,18 @@ export const setThreadHasHistory = (state, {status}) => {
     return state.setIn(['threadHasHistory'], status)
 }
 
-export const updateChatroomDetails = (state, {formatMsg}) => {
-	let { chatType, to, id } = formatMsg;
+export const updateNotifyDetails = (state, {formatMsg}) => {
+	let { chatType, to, type } = formatMsg;
 	let messageList = state[chatType][to].asMutable({ deep: true });
 	const message = {
 		...formatMsg,
-		type: "txt",
-		// notify: "roomNotify",
 		body:{
-			chatType,
-			type: "txt",
-			to,
-			id,
-			notify: "roomNotify",
+			type
 		}
 	}
 	AppDB.addMessage(message)
 	messageList.push(message);
 	state = state.setIn([chatType, to], messageList);
-	console.log('state>>>',state);
 	return state
 }
 
@@ -919,7 +911,7 @@ export const messageReducer = createReducer(INITIAL_STATE, {
     [Types.SET_THREAD_HISTORY_START]: setThreadHistoryStart,
     [Types.SET_THREAD_HAS_HISTORY]: setThreadHasHistory,
 	[Types.UPDATE_REACTION_DATA]: updateReactionData,
-	[Types.UPDATE_CHATROOM_DETAILS]: updateChatroomDetails,
+	[Types.UPDATE_NOTIFY_DETAILS]: updateNotifyDetails,
 
 })
 

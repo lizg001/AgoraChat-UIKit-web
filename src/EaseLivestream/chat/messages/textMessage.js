@@ -13,13 +13,12 @@ import { EaseLivestreamContext } from "../index";
 import streamerIcon from '../../../common/images/streamer.png'
 import moderatorIcon from '../../../common/images/moderator.png'
 import muteIcon from '../../../common/images/mute.png'
-import joinIcon from '../../../common/images/join.png'
 
 const useStyles = makeStyles((theme) => ({
   pulldownListItem: {
     display: "flex",
     listStyle: "none",
-    marginBottom: "26px",
+    marginBottom: "16px",
     position: "relative",
     alignItems: "center",
   },
@@ -56,36 +55,21 @@ const useStyles = makeStyles((theme) => ({
     margin: "3px",
   },
   avatarStyle: {
-    height: "40px",
-    width: "40px",
+    height: "28px",
+    width: "28px",
     borderRadius: "50%",
   },
-  userInfoBox:{
+  userInfoBox: {
     display: "flex",
     alignItems: "center"
   },
-  iconStyle:{
-    width:"38px"
+  iconStyle: {
+    width: "38px"
   },
-  muteIconStyle:{
+  muteIconStyle: {
     width: "12px",
     marginLeft: "4px",
   },
-  joinTextStyle:{
-    fontFamily: "Roboto",
-    fontSize: "12px",
-    fontWeight: "600",
-    lineLeight: "16px",
-    letterSpacing: "0.15px",
-    textAlign: "left",
-    color: "#FFFFFF",
-    margin:"0 4px",
-    display: "flex",
-    alignItems: "center"
-  },
-  joinIconStyle:{
-    marginLeft: "4px"
-  }
 }));
 function TextMessage({ message }) {
   let easeLivestreamProps = useContext(EaseLivestreamContext);
@@ -140,21 +124,17 @@ function TextMessage({ message }) {
       <div>
         <img className={classes.avatarStyle} src={roomUserInfo && roomUserInfo[message.from]?.avatar || avatar}></img>
       </div>
-      {message?.notify ? <div className={classes.userInfoBox}>
-        <span className={classes.userName}>{roomUserInfo[message.from]?.nickname || message.from}</span>
-        <span className={classes.joinTextStyle}>{i18next.t('Joined')} <img src={joinIcon} alt="" className={classes.joinIconStyle}/></span>
-      </div>:<>
-        <div className={classes.textBodyBox}>
-          <div className={classes.userInfoBox}>
-            <span className={classes.userName}>{roomUserInfo && roomUserInfo[message.from]?.nickname || message.from}</span>
-            {roomUserInfo[message.from]?.isStreamer && <img src={streamerIcon} alt="" className={classes.iconStyle} />}
-            {roomUserInfo[message.from]?.isAdmin && <img src={moderatorIcon} alt="" className={classes.iconStyle} />}
-            {roomUserInfo[message.from]?.isMuted && <img src={muteIcon} alt="" className={classes.muteIconStyle} />}
-          </div>
-          <div className={classes.textBody}>{renderTxt(message.body.msg)}</div>
-        </div></>}
+      <div className={classes.textBodyBox}>
+        <div className={classes.userInfoBox}>
+          <span className={classes.userName}>{roomUserInfo && roomUserInfo[message.from]?.nickname || message.from}</span>
+          {roomUserInfo[message.from]?.isStreamer && <img src={streamerIcon} alt="" className={classes.iconStyle} />}
+          {roomUserInfo[message.from]?.isAdmin && <img src={moderatorIcon} alt="" className={classes.iconStyle} />}
+          {roomUserInfo[message.from]?.isMuted && <img src={muteIcon} alt="" className={classes.muteIconStyle} />}
+        </div>
+        <div className={classes.textBody}>{renderTxt(message.body.msg)}</div>
+      </div>
     </li>
-    
+
   );
 }
 

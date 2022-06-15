@@ -1,6 +1,6 @@
 {
   "name": "chat-uikit-live",
-  "version": "1.8.5",
+  "version": "1.9.1",
   "description": "chat-uikit React component",
   "main": "lib/index.js",
   "module": "es/index.js",

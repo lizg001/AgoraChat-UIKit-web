@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import MessageActions from "../../redux/message";
 import TextMessage from "./messages/textMessage";
+import Notify from './messages/notify'
 import i18next from "i18next";
 
 const useStyles = makeStyles((theme) => ({
@@ -94,6 +95,10 @@ function MessageList({ messageList, showByselfAvatar }) {
                       showByselfAvatar={showByselfAvatar}
                     />
                   );
+                } else if (msg.body.type === "notify") {
+                  return (
+                    <Notify message={msg} key={msg.id + index}></Notify>
+                  )
                 } else {
                   return null;
                 }
