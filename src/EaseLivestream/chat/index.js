@@ -126,6 +126,8 @@ EaseLivestreamProvider.propTypes = {
 
   closeChat: PropTypes.func,
   roomUserInfo: PropTypes.object,
+
+  disabledInput:PropTypes.bool,
 };
 
 EaseLivestreamProvider.defaultProps = {

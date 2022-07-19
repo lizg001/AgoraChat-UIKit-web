@@ -20,24 +20,34 @@ const useStyles = makeStyles((theme) => ({
     listStyle: "none",
     marginBottom: "16px",
     position: "relative",
-    alignItems: "center",
+    // alignItems: "center",
   },
   userName: {
-    padding: "0 10px 4px",
+    padding: "0 10px",
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontStyle: "normal",
     color: "#a5a5a5",
-    fontSize: "14px",
+    fontSize: "12px",
     display: "inline-block",
     textAlign: "left",
+    lineHeight: "14px"
   },
   textBodyBox: {
     display: "flex",
     flexDirection: "column",
-    maxWidth: "65%",
+    maxWidth: "80%",
     alignItems: "unset",
     wordBreak: "break-word"
   },
   textBody: {
-    padding: "0 15px",
+    padding: "0 10px",
+    fontFamily: "Roboto",
+    fontWeight: "600",
+    fontStyle: "normal",
+    fontSize: "16px",
+    lineHeight: "22px",
+    letterSpacing: "0.15px"
   },
   time: {
     position: "absolute",
@@ -61,7 +71,8 @@ const useStyles = makeStyles((theme) => ({
   },
   userInfoBox: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    height:"14px",
   },
   iconStyle: {
     width: "38px"

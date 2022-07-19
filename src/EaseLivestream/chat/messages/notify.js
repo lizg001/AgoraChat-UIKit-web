@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '600',
         lineHeight: '20px',
         display:"flex",
-        alignItems:"center"
+        alignItems:"center",
+        padding:"0 12px"
     },
     avatarStyle: {
         height: "28px",
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "50%",
     },
     userName: {
-        padding: "0 10px 4px",
+        // padding: "0 10px 4px",
         color: "#a5a5a5",
         fontSize: "14px",
         display: "inline-block",

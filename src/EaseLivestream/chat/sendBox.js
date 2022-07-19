@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SendBox(props) {
   let easeLivestreamProps = useContext(EaseLivestreamContext);
-  const { easeInputMenu,menuList,handleMenuItem } = easeLivestreamProps;
+  const { easeInputMenu,menuList,handleMenuItem,disabledInput } = easeLivestreamProps;
   const dispatch = useDispatch();
   const classes = useStyles();
   const globalProps = useSelector((state) => state.global.globalProps);
@@ -158,6 +158,7 @@ function SendBox(props) {
         onChange={handleInputChange}
         ref={inputRef}
         placeholder={'Say Hi...'}
+        disabled={disabledInput}
       ></TextareaAutosize>
     );
   };
@@ -194,6 +195,13 @@ function SendBox(props) {
           <>
             {renderTextarea()}
             {renderEmoji()}
+            {renderSend()}
+          </>
+        );
+      case "onlyInput":
+        return (
+          <>
+            {renderTextarea()}
             {renderSend()}
           </>
         );
